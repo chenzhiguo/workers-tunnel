@@ -8,6 +8,13 @@ mod types;
 
 #[event(fetch)]
 async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
+    console_log!(
+        "{} {}, located at: {:?}, within: {}",
+        req.method().to_string(),
+        req.path(),
+        req.cf().coordinates().unwrap_or_default(),
+        req.cf().region().unwrap_or("unknown region".into())
+    );
     if let Some(webstr) = req.headers().get("Upgrade")? {
         // if webstr == "websocket" {
         //     console_log!("header is websocket!");
