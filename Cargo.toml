@@ -18,6 +18,24 @@ futures-util = { version = "0.3.29", default-features = false }
 base64-url = "2.0.1"
 bytes = "1.5.0"
 serde = { version = "1.0.193", features = ["derive"] }
+rand = "0.8.5"
+getrandom = { version = "0.2.11", features = ["js"] }
+serde_json = "1.0.110"
+reqwest = { version = "0.11.23", features = ["json"] }
+wasm-bindgen = { version = "0.2.86", features = ["serde-serialize"] }
+js-sys = { version = "0.3.63", wasm-bindgen = "0.2.86" }
+#wasm-bindgen-futures = "0.4.39"
+
+[dependencies.web-sys]
+version = "0.3.63"
+features = [
+    'Headers',
+    'Request',
+    'RequestInit',
+    'RequestMode',
+    'Response',
+    'Window',
+]
 
 [profile.release]
 lto = true
