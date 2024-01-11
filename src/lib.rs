@@ -125,8 +125,8 @@ pub async fn handle_get_best(mut request: Request, ctx: RouteContext<()>) -> Res
     let response = client.get(best_ip_link).send().await.unwrap();
 
     // let json: Value = from_str(&response.text().await.unwrap()).unwrap();
-    let json = &response.text().await.unwrap();
-    console_log!("{}", json);
+    // let json = &response.text().await.unwrap();
+    // console_log!("{}", json);
     // let resp = reqwest::get(best_ip_link)
     //     .await?
     //     .json::<String>()
@@ -136,10 +136,12 @@ pub async fn handle_get_best(mut request: Request, ctx: RouteContext<()>) -> Res
     // let mut res: Resp = resp.dyn_into().unwrap();
     // 获取 JSON 数据
     // let json = res.as_string().ok_or_else(|| "{}")?;
-    Response::from_json(&types::GenericResponse {
-        status: 200,
-        message: json.to_string(),
-    })
+    // Response::from_json(&types::GenericResponse {
+    //     status: 200,
+    //     message: json.to_string(),
+    // })
+    let data = response.bytes().await.expect("No response!").to_vec();
+    Response::from_body(ResponseBody::Body(data))
 }
 
 #[wasm_bindgen]
